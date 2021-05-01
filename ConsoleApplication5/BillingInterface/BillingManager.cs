@@ -8,6 +8,7 @@ namespace ConsoleApplication5.BillingInterface
 {
     public interface BillingManager
     {
+
         /// <summary>
         ///  잔액조회
         /// </summary>

@@ -10,10 +10,14 @@ namespace ConsoleApplication5
 {
     class Program
     {
+        //메인 응용프로그램
         static void Main(string[] args)
         {
+            //유저 여러개라 리스트로 선언함
             List<BillingManager> managers = new List<BillingManager>();
+            //인터페이스 선언 (usermanager, adminmanager에서 상속받아서 사용할거)
             BillingManager manager = null;
+            //입력받는값선언
             string input = string.Empty;
 
             do{
@@ -21,6 +25,8 @@ namespace ConsoleApplication5
                 
                 try
                 {
+                    //입력받은 아이디를 통해 인터페이스(BillingManager)를 받는거긴 한데 인터페이스는 객체 생성을 할 수 없음
+                    //따라서 BillingManager를 상속받고 있는 UserManger or AdminManager 선언을 한다
                     manager = BillingFactory.GetInstance(input);
                 }
                 catch(UserNotFoundException ex){
@@ -29,11 +35,13 @@ namespace ConsoleApplication5
             } while(manager == null);
             managers.Add(manager);
 
+
             do
             {
                 PrintMenu(out input);
-
+                //10 : 로그인 변경 입력시에만 실행
                 if(input.Equals(10)){
+                    //새로운 아이디로 유저/어드민 객체 생성
                     do
                     {
                         PrintLoginMenu(out input);
@@ -49,13 +57,16 @@ namespace ConsoleApplication5
                     } while (manager == null);
                     managers.Add(manager);
                 }
-
+                //입력받은 메뉴실행
+                //managers는 그동안 모든 회원들의 정보가 담겨있음
+                //manager 는 현재 로그인된 계정
                 DoMenu(manager, input, managers);
 
             } while (!input.Equals("11"));
             
         }
-
+        //private 선언으로 다른 클래스에서 호출할수 없음
+        //static 함수나 변수는 heap 올라가고, 나머지는 stack에 쌓이고 
         private static void PrintLoginMenu(out string input){
             Console.WriteLine("로그인할 아이디를 입력해주세요");
             input = Console.ReadLine();

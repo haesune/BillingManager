@@ -1,2 +1,9 @@
 c:\users\ysjee\documents\visual studio 2013\Projects\ConsoleApplication5\ConsoleApplication5\bin\Debug\ConsoleApplication5.exe.config
 C:\Users\ysjee\documents\visual studio 2013\Projects\ConsoleApplication5\ConsoleApplication5\obj\Debug\ConsoleApplication5.csprojResolveAssemblyReference.cache
+C:\해선스터디\Git\ConsoleApplication5\obj\Debug\ConsoleApplication5.csprojAssemblyReference.cache
+C:\해선스터디\Git\ConsoleApplication5\obj\Debug\ConsoleApplication5.csproj.CoreCompileInputs.cache
+C:\해선스터디\Git\ConsoleApplication5\bin\Debug\ConsoleApplication5.exe.config
+C:\해선스터디\Git\ConsoleApplication5\bin\Debug\ConsoleApplication5.exe
+C:\해선스터디\Git\ConsoleApplication5\bin\Debug\ConsoleApplication5.pdb
+C:\해선스터디\Git\ConsoleApplication5\obj\Debug\ConsoleApplication5.exe
+C:\해선스터디\Git\ConsoleApplication5\obj\Debug\ConsoleApplication5.pdb

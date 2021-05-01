@@ -8,9 +8,17 @@ namespace ConsoleApplication5.BillingInterface
 {
     public class AdminManager : BillingManager
     {
+        int currBalance = 0;
         public int GetBalance()
         {
-            throw new NotImplementedException();
+            try {
+                Console.WriteLine("현재잔액 : " + currBalance);
+            }            
+            catch{ 
+            
+            }
+            return 0;
+
         }
 
         public int InsertCash(int cashAmount)
