@@ -1,0 +1,6 @@
+C:\Users\ysjee\documents\visual studio 2013\Projects\ConsoleApplication5\ConsoleApplication5\obj\Release\ConsoleApplication5.csprojResolveAssemblyReference.cache
+C:\Users\ysjee\documents\visual studio 2013\Projects\ConsoleApplication5\ConsoleApplication5\bin\Release\ConsoleApplication5.exe.config
+C:\Users\ysjee\documents\visual studio 2013\Projects\ConsoleApplication5\ConsoleApplication5\bin\Release\ConsoleApplication5.exe
+C:\Users\ysjee\documents\visual studio 2013\Projects\ConsoleApplication5\ConsoleApplication5\bin\Release\ConsoleApplication5.pdb
+C:\Users\ysjee\documents\visual studio 2013\Projects\ConsoleApplication5\ConsoleApplication5\obj\Release\ConsoleApplication5.exe
+C:\Users\ysjee\documents\visual studio 2013\Projects\ConsoleApplication5\ConsoleApplication5\obj\Release\ConsoleApplication5.pdb
