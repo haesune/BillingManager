@@ -7,3 +7,9 @@ C:\해선스터디\Git\ConsoleApplication5\bin\Debug\ConsoleApplication5.exe
 C:\해선스터디\Git\ConsoleApplication5\bin\Debug\ConsoleApplication5.pdb
 C:\해선스터디\Git\ConsoleApplication5\obj\Debug\ConsoleApplication5.exe
 C:\해선스터디\Git\ConsoleApplication5\obj\Debug\ConsoleApplication5.pdb
+D:\BillingManager\ConsoleApplication5\bin\Debug\ConsoleApplication5.exe.config
+D:\BillingManager\ConsoleApplication5\bin\Debug\ConsoleApplication5.exe
+D:\BillingManager\ConsoleApplication5\bin\Debug\ConsoleApplication5.pdb
+D:\BillingManager\ConsoleApplication5\obj\Debug\ConsoleApplication5.csprojResolveAssemblyReference.cache
+D:\BillingManager\ConsoleApplication5\obj\Debug\ConsoleApplication5.exe
+D:\BillingManager\ConsoleApplication5\obj\Debug\ConsoleApplication5.pdb

@@ -99,12 +99,12 @@ namespace ConsoleApplication5
                     pl_RetVal = manager.GetBalance();
                     break;
                 case "2":
-                    Console.Write("충전할 캐시금액입력");
+                    Console.Write("충전할 캐시금액입력:");
                     int amt = Convert.ToInt32(Console.ReadLine());
                     pl_RetVal = manager.InsertCash(amt);
                     break;
                 case "3":
-                    Console.Write("환불할 캐시번호 입력");
+                    Console.Write("환불할 캐시번호 입력:");
                     int cashno = Convert.ToInt32(Console.ReadLine());
                     pl_RetVal = manager.InsertCash(cashno);
                     break;
@@ -131,7 +131,7 @@ namespace ConsoleApplication5
                     pl_RetVal = manager.PrintItemPurchaseHistory(managers);
                     break;
             }
-            Console.Clear();
+         //   Console.Clear();
             if (pl_RetVal.Equals(0))
             {
                 Console.WriteLine("성공");
