@@ -19,5 +19,10 @@ namespace ConsoleApplication5.BillingInterface
 
         public DateTime regDate;
         public DateTime cnlDate;
+
+        public override string ToString()
+        {
+            return "purchaseNo:" + purchaseNo + ",userId:" + userId + ",itemId:" + itemId + ",itemName:" + itemName + ",price:" + price + ",useState:" + useState + ",regDate:" + regDate + ",cnlDate:" + cnlDate;
+        }
     }
 }
