@@ -26,10 +26,12 @@ namespace ConsoleApplication5.BillingInterface
 
         public int GetBalance()
         {
-            try {
+            try
+            {
                 Console.Write("현재잔액 : " + currBalance);
-            }            
-            catch{
+            }
+            catch
+            {
                 throw new NotImplementedException();
             }
             return 0;
@@ -42,7 +44,8 @@ namespace ConsoleApplication5.BillingInterface
 
             try
             {
-                cash.cashNo = cashList.Count+1;
+                cash.cashNo = cashList.Count + 1;
+
                 //Q&A)USER ID 는 어디서 가져와야하는지
                 cash.userId = "admin";
                 cash.chargeAmt = cashAmount;
@@ -61,7 +64,8 @@ namespace ConsoleApplication5.BillingInterface
 
                 Console.WriteLine("=====cash 리스트===== ");
                 //Q&A)cashList 출력 방법
-                for (int i = 0; i < cashList.Count; i++) {
+                for (int i = 0; i < cashList.Count; i++)
+                {
 
                     Console.WriteLine(cashList[i].ToString());
                 }
@@ -79,12 +83,18 @@ namespace ConsoleApplication5.BillingInterface
             {
                 for (int i = 0; i < cashList.Count; i++)
                 {
-                    if (cashList[i].cashNo.Equals(intCashNo)) {
+                    //구매취소
+
+                    //캐시 취소
+                    if (cashList[i].cashNo.Equals(intCashNo))
+                    {
+                        cashList[i].useState = 2;
+                        cashList[i].cnlDate = DateTime.Now;
 
                         break;
                     }
                 }
-                
+
             }
             catch
             {
@@ -99,6 +109,7 @@ namespace ConsoleApplication5.BillingInterface
             Cash cash = new Cash();
             Purchase purchase = new Purchase();
             CashUseDtl cashUseDtl = new CashUseDtl();
+
             int pl_purchaseNo = purchaseList.Count + 1;
 
             try
@@ -115,7 +126,7 @@ namespace ConsoleApplication5.BillingInterface
                 }
 
                 //cashUseDtl 데이터 입력
-                cashUseDtl.cashNo  = 123;
+                cashUseDtl.cashNo = 123;
                 cashUseDtl.groupId = cashUseDtlList.Count + 1;
                 cashUseDtl.purchaseNo = pl_purchaseNo;
 
@@ -129,7 +140,7 @@ namespace ConsoleApplication5.BillingInterface
                 purchase.price = itemPrice;
                 purchase.useState = 1;
                 purchase.regDate = DateTime.Now;
-                
+
                 purchaseList.Add(purchase);
 
                 Console.WriteLine("구매 개수:" + purchaseList.Count);
