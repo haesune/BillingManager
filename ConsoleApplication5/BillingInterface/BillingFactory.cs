@@ -17,7 +17,8 @@ namespace ConsoleApplication5.BillingInterface
             //페레 특 : 그냥 equls로 통일하자
             if (userID.Equals("admin"))
             {
-                return new AdminManager();
+                
+                return new AdminManager(userID);
             }
             else if (userID.Equals("user1")|| userID.Equals("user2"))
             {

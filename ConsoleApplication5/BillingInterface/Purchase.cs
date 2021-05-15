@@ -8,17 +8,23 @@ namespace ConsoleApplication5.BillingInterface
 {
     class Purchase
     {
-        public int purchaseNo;
+        public readonly int purchaseNo;
         public int useState;
         public int itemId;
 
-        public String userId;
-        public String itemName;
+        public string userId;
+        public string itemName;
 
         public double price;
 
         public DateTime regDate;
         public DateTime cnlDate;
+        public static int purcahseCount;
+
+        public Purchase(string userId){
+            purchaseNo = ++ purcahseCount;
+            this.userId = userId;
+        }
 
         public override string ToString()
         {
