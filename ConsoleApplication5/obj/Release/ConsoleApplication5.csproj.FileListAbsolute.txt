@@ -4,3 +4,10 @@ C:\Users\ysjee\documents\visual studio 2013\Projects\ConsoleApplication5\Console
 C:\Users\ysjee\documents\visual studio 2013\Projects\ConsoleApplication5\ConsoleApplication5\bin\Release\ConsoleApplication5.pdb
 C:\Users\ysjee\documents\visual studio 2013\Projects\ConsoleApplication5\ConsoleApplication5\obj\Release\ConsoleApplication5.exe
 C:\Users\ysjee\documents\visual studio 2013\Projects\ConsoleApplication5\ConsoleApplication5\obj\Release\ConsoleApplication5.pdb
+C:\해선스터디\Git\ConsoleApplication5\bin\Release\ConsoleApplication5.exe.config
+C:\해선스터디\Git\ConsoleApplication5\bin\Release\ConsoleApplication5.exe
+C:\해선스터디\Git\ConsoleApplication5\bin\Release\ConsoleApplication5.pdb
+C:\해선스터디\Git\ConsoleApplication5\obj\Release\ConsoleApplication5.csprojAssemblyReference.cache
+C:\해선스터디\Git\ConsoleApplication5\obj\Release\ConsoleApplication5.csproj.CoreCompileInputs.cache
+C:\해선스터디\Git\ConsoleApplication5\obj\Release\ConsoleApplication5.exe
+C:\해선스터디\Git\ConsoleApplication5\obj\Release\ConsoleApplication5.pdb

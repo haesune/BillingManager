@@ -8,7 +8,11 @@ namespace ConsoleApplication5.BillingInterface
 {
     public class AdminManager : BillingManager
     {
-        double currBalance = 0;
+        readonly string userId = string.Empty;
+        double currBalance=0;
+        public AdminManager(string userId) {
+            this.userId = userId;
+        }
 
         //캐시 등록 리스트로 선언함
         List<Cash> cashList = new List<Cash>();
@@ -19,6 +23,7 @@ namespace ConsoleApplication5.BillingInterface
 
         //const : 선언시 그 값을 할당해야하며, 한 번 할당된 후 변경 불가능하다 . 즉 변수 정의와 함께 초기화 되어야 하는 상수임
         //readonly: 선언시 값을 할당하지 않아도 가능하며, 생성자에서 한번 더 값 변경 가능 
+        //TO DO :클래스로 빼기
         public const int itemId = 1000;
         public const double itemPrice = 1000;
         public const String itemName = "testItem";
@@ -28,7 +33,13 @@ namespace ConsoleApplication5.BillingInterface
         {
             try
             {
-                Console.Write("현재잔액 : " + currBalance);
+                double totalCurrBalance = 0;
+
+                for (int i = 0; i < cashList.Count; i++) {
+                   totalCurrBalance = totalCurrBalance + cashList[i].remainAmt;
+                }
+                currBalance = totalCurrBalance;
+                Console.Write("현재잔액 : " + totalCurrBalance);
             }
             catch
             {
@@ -40,14 +51,15 @@ namespace ConsoleApplication5.BillingInterface
 
         public int InsertCash(int cashAmount)
         {
-            Cash cash = new Cash();
+            Cash cash = new Cash(userId);
 
             try
             {
-                cash.cashNo = cashList.Count + 1;
-
-                //Q&A)USER ID 는 어디서 가져와야하는지
-                cash.userId = "admin";
+                //++ a a를 플러스 시킨것을 담음 
+                //a++ a를 먼저 담고 , 플러스시킴
+                //아래 코드는 Cash 클래스의 생성자로 빼냈음. 이제 필요 없 ㅇ! 음 ! 
+                //cash.cashNo = ++ Cash.cashCount;
+            
                 cash.chargeAmt = cashAmount;
                 cash.remainAmt = cashAmount;
                 cash.useState = 1;
@@ -55,19 +67,11 @@ namespace ConsoleApplication5.BillingInterface
 
                 cashList.Add(cash);
 
-                Console.WriteLine("캐시 개수:" + cashList.Count);
-
-                currBalance = currBalance + cashAmount;
-
-                Console.WriteLine("충전 금액 : " + cashAmount);
-                Console.WriteLine("충전 후 잔액 : " + currBalance);
-
                 Console.WriteLine("=====cash 리스트===== ");
                 //Q&A)cashList 출력 방법
                 for (int i = 0; i < cashList.Count; i++)
                 {
-
-                    Console.WriteLine(cashList[i].ToString());
+                    Console.WriteLine(cashList[i]);
                 }
             }
             catch
@@ -79,10 +83,12 @@ namespace ConsoleApplication5.BillingInterface
 
         public int RefundCash(int intCashNo)
         {
+            //TODO: 환불은 잔액이 충전금액과 다르면 환불 못하게 하기!
             try
             {
                 for (int i = 0; i < cashList.Count; i++)
                 {
+                    
                     //구매취소
 
                     //캐시 취소
@@ -107,34 +113,55 @@ namespace ConsoleApplication5.BillingInterface
         {
 
             Cash cash = new Cash();
-            Purchase purchase = new Purchase();
-            CashUseDtl cashUseDtl = new CashUseDtl();
-
-            int pl_purchaseNo = purchaseList.Count + 1;
+            Purchase purchase = new Purchase(userId);
 
             try
             {
+                //잔액체크
+                GetBalance();
+                if (currBalance < itemPrice) {
+                    //튕겨
+                    Console.WriteLine("잔액 부족");
+                    return 1;
+                }
+                double remainItemPrice = itemPrice;
                 //어떤캐시로 구매할 것인지 확인(구매 가능여부 체크) 
                 for (int i = 0; i < cashList.Count; i++)
                 {
-                    cash = cashList[i].getCashInfo();
+                    cash = cashList[i];
+                    CashUseDtl cashUseDtl = new CashUseDtl();
+                    cashUseDtl.purchaseNo = purchase.purchaseNo;
                     if (cash.remainAmt > 0)
                     {
-                        //해당 캐시 잔액 차감 처리 
+                        cashUseDtl.cashNo = cash.cashNo;
+                        //캐시 잔액 >아이템잔액
+                        if (cash.remainAmt >= remainItemPrice)
+                        {
+                            cashUseDtl.purchasePrice = remainItemPrice;
 
+                            //이걸로 캐시 차감하고 끝
+                            cash.remainAmt = cash.remainAmt - remainItemPrice;
+                            
+                            Console.WriteLine("구매 성공><");
+                            cashUseDtlList.Add(cashUseDtl);
+                            //튕김
+                            break;
+                        } // 캐시 잔액 < 아이템잔액 
+                        else
+                        {
+                            cashUseDtl.purchasePrice = cash.remainAmt;
+                            remainItemPrice = remainItemPrice - cash.remainAmt;
+
+                            //한번 포문 더 돌아야함
+                            cash.remainAmt = 0;
+                            cashUseDtlList.Add(cashUseDtl);
+
+                            continue;
+                        }
                     }
                 }
 
-                //cashUseDtl 데이터 입력
-                cashUseDtl.cashNo = 123;
-                cashUseDtl.groupId = cashUseDtlList.Count + 1;
-                cashUseDtl.purchaseNo = pl_purchaseNo;
 
-                //구매 데이터 입력
-                purchase.purchaseNo = pl_purchaseNo;
-
-                //Q&A)USER ID 는 어디서 가져와야하는지
-                purchase.userId = "admin";
                 purchase.itemId = itemNo;
                 purchase.itemName = itemName;
                 purchase.price = itemPrice;
@@ -143,17 +170,16 @@ namespace ConsoleApplication5.BillingInterface
 
                 purchaseList.Add(purchase);
 
-                Console.WriteLine("구매 개수:" + purchaseList.Count);
-
-                currBalance = currBalance - purchase.price;
-
-                Console.WriteLine("구매 후 잔액 : " + currBalance);
-
-
                 Console.WriteLine("=====purchaseList 리스트===== ");
                 for (int i = 0; i < purchaseList.Count; i++)
                 {
-                    Console.WriteLine(purchaseList[i].ToString());
+                    Console.WriteLine(purchaseList[i]);
+                }
+
+                Console.WriteLine("=====cashUseDtl 리스트===== ");
+                for (int i = 0; i < cashUseDtlList.Count; i++)
+                {
+                    Console.WriteLine(cashUseDtlList[i]);
                 }
             }
             catch
@@ -165,6 +191,7 @@ namespace ConsoleApplication5.BillingInterface
 
         public int PurchaseCancelItem(int purchaseNo)
         {
+            //TODO: 구매취소하고 캐시 돌려주기 -> 환불가능
             throw new NotImplementedException();
         }
 
