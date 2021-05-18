@@ -46,7 +46,6 @@ namespace ConsoleApplication5.BillingInterface
                 throw new NotImplementedException();
             }
             return 0;
-
         }
 
         public int InsertCash(int cashAmount)
@@ -88,15 +87,19 @@ namespace ConsoleApplication5.BillingInterface
             {
                 for (int i = 0; i < cashList.Count; i++)
                 {
-                    
-                    //구매취소
-
                     //캐시 취소
                     if (cashList[i].cashNo.Equals(intCashNo))
                     {
-                        cashList[i].useState = 2;
-                        cashList[i].cnlDate = DateTime.Now;
+                        if (cashList[i].chargeAmt != cashList[i].remainAmt)
+                        {
+                            Console.WriteLine("환불 금액 부족");
+                            return 1;
+                        }
+                        else {
 
+                            cashList[i].useState = 2;
+                            cashList[i].cnlDate = DateTime.Now;
+                        }
                         break;
                     }
                 }
@@ -160,8 +163,7 @@ namespace ConsoleApplication5.BillingInterface
                         }
                     }
                 }
-
-
+                
                 purchase.itemId = itemNo;
                 purchase.itemName = itemName;
                 purchase.price = itemPrice;
@@ -170,13 +172,13 @@ namespace ConsoleApplication5.BillingInterface
 
                 purchaseList.Add(purchase);
 
-                Console.WriteLine("=====purchaseList 리스트===== ");
+                Console.WriteLine("===== purchaseList 리스트 ===== ");
                 for (int i = 0; i < purchaseList.Count; i++)
                 {
                     Console.WriteLine(purchaseList[i]);
                 }
 
-                Console.WriteLine("=====cashUseDtl 리스트===== ");
+                Console.WriteLine("===== cashUseDtl 리스트 ===== ");
                 for (int i = 0; i < cashUseDtlList.Count; i++)
                 {
                     Console.WriteLine(cashUseDtlList[i]);
@@ -192,7 +194,41 @@ namespace ConsoleApplication5.BillingInterface
         public int PurchaseCancelItem(int purchaseNo)
         {
             //TODO: 구매취소하고 캐시 돌려주기 -> 환불가능
-            throw new NotImplementedException();
+            //구매한거 먼저 찾아서 취소 , 
+            //dtl 테이블에서 해당 구매번호에 사용된 캐시 넘버와 금액 가져오기
+            //
+            try
+            {
+                for (int i = 0; i < purchaseList.Count; i++)
+                {
+                    //구매 취소
+                    if (purchaseList[i].purchaseNo.Equals(purchaseNo))
+                    {
+                        purchaseList[i].useState = 2;
+                        purchaseList[i].cnlDate = DateTime.Now;
+
+                        for (int j = 0; j < cashUseDtlList.Count; j++)
+                        {
+                            if (cashUseDtlList[j].purchaseNo.Equals(purchaseNo))
+                            {
+                                for (int k= 0; k < cashList.Count; k++)
+                                {
+                                    if (cashList[k].cashNo.Equals(cashUseDtlList[j].cashNo))
+                                    {
+                                        cashList[k].remainAmt = cashList[k].remainAmt + cashUseDtlList[j].purchasePrice;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+            catch
+            {
+                throw new NotImplementedException();
+            }
+            return 0;
         }
 
         public int PrintItemList()
