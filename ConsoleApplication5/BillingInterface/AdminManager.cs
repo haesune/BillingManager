@@ -28,7 +28,6 @@ namespace ConsoleApplication5.BillingInterface
         public const double itemPrice = 1000;
         public const String itemName = "testItem";
 
-
         public int GetBalance()
         {
             try
@@ -36,7 +35,9 @@ namespace ConsoleApplication5.BillingInterface
                 double totalCurrBalance = 0;
 
                 for (int i = 0; i < cashList.Count; i++) {
-                   totalCurrBalance = totalCurrBalance + cashList[i].remainAmt;
+                    if (cashList[i].useState.Equals(1)) {
+                        totalCurrBalance = totalCurrBalance + cashList[i].remainAmt;
+                    }
                 }
                 currBalance = totalCurrBalance;
                 Console.Write("현재잔액 : " + totalCurrBalance);
@@ -92,11 +93,10 @@ namespace ConsoleApplication5.BillingInterface
                     {
                         if (cashList[i].chargeAmt != cashList[i].remainAmt)
                         {
-                            Console.WriteLine("환불 금액 부족");
+                            Console.WriteLine("환불 금액 부족 (구매부터 취소하세요)");
                             return 1;
                         }
                         else {
-
                             cashList[i].useState = 2;
                             cashList[i].cnlDate = DateTime.Now;
                         }
@@ -132,8 +132,10 @@ namespace ConsoleApplication5.BillingInterface
                 for (int i = 0; i < cashList.Count; i++)
                 {
                     cash = cashList[i];
+
                     CashUseDtl cashUseDtl = new CashUseDtl();
                     cashUseDtl.purchaseNo = purchase.purchaseNo;
+
                     if (cash.remainAmt > 0)
                     {
                         cashUseDtl.cashNo = cash.cashNo;
@@ -145,7 +147,8 @@ namespace ConsoleApplication5.BillingInterface
                             //이걸로 캐시 차감하고 끝
                             cash.remainAmt = cash.remainAmt - remainItemPrice;
                             
-                            Console.WriteLine("구매 성공><");
+                            Console.WriteLine("구매 성공> <");
+
                             cashUseDtlList.Add(cashUseDtl);
                             //튕김
                             break;
@@ -164,11 +167,11 @@ namespace ConsoleApplication5.BillingInterface
                     }
                 }
                 
-                purchase.itemId = itemNo;
+                purchase.itemId   = itemNo;
                 purchase.itemName = itemName;
-                purchase.price = itemPrice;
+                purchase.price    = itemPrice;
                 purchase.useState = 1;
-                purchase.regDate = DateTime.Now;
+                purchase.regDate  = DateTime.Now;
 
                 purchaseList.Add(purchase);
 
@@ -243,12 +246,56 @@ namespace ConsoleApplication5.BillingInterface
 
         public int PrintItemPurchaseHistory(List<BillingManager> objList)
         {
-            throw new NotImplementedException();
+            try
+            {
+
+                if (purchaseList.Count.Equals(0))
+                {
+
+                    Console.WriteLine("===== 구매 목록이 없습니다 ===== ");
+                }
+                else
+                {
+                    Console.WriteLine("===== purchaseList 리스트 ===== ");
+                    for (int i = 0; i < purchaseList.Count; i++)
+                    {
+                        Console.WriteLine(purchaseList[i]);
+                    }
+                }
+            }
+            catch
+            {
+                throw new NotImplementedException();
+            }
+            return 0;
+
         }
 
         public int PrintCashHistory(List<BillingManager> objList)
         {
-            throw new NotImplementedException();
+            try
+            {
+                if (cashList.Count.Equals(0))
+                {
+
+                    Console.WriteLine("===== cash 목록이 없습니다 ===== ");
+                }
+                else
+                {
+                    Console.WriteLine("=====cash 리스트===== ");
+
+                    for (int i = 0; i < cashList.Count; i++)
+                    {
+                        Console.WriteLine(cashList[i]);
+                    }
+                }
+            }
+            catch
+            {
+                throw new NotImplementedException();
+            }
+            return 0;
+
         }
     }
 }

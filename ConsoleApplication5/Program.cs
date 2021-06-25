@@ -106,7 +106,7 @@ namespace ConsoleApplication5
                 case "3":
                     Console.Write("환불할 캐시번호 입력:");
                     int cashno = Convert.ToInt32(Console.ReadLine());
-                    pl_RetVal = manager.InsertCash(cashno);
+                    pl_RetVal = manager.RefundCash(cashno);
                     break;
                 case "4":
                     Console.Write("구매 할 아이템 번호 입력");
