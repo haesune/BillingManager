@@ -44,7 +44,9 @@
     <Compile Include="BillingInterface\AdminManager.cs" />
     <Compile Include="BillingInterface\BillingFactory.cs" />
     <Compile Include="BillingInterface\BillingManager.cs" />
+    <Compile Include="BillingInterface\Item.cs" />
     <Compile Include="BillingInterface\CashUseDtl.cs" />
+    <Compile Include="BillingInterface\ItemCollection.cs" />
     <Compile Include="BillingInterface\Purchase.cs" />
     <Compile Include="BillingInterface\Cash.cs" />
     <Compile Include="BillingInterface\User.cs" />

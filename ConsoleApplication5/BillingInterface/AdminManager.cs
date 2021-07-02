@@ -20,6 +20,7 @@ namespace ConsoleApplication5.BillingInterface
         List<Purchase> purchaseList = new List<Purchase>();
         //caseUseDtl 리스트로 선언함
         List<CashUseDtl> cashUseDtlList = new List<CashUseDtl>();
+        ItemCollection objItemCollection = new ItemCollection();
 
         //const : 선언시 그 값을 할당해야하며, 한 번 할당된 후 변경 불가능하다 . 즉 변수 정의와 함께 초기화 되어야 하는 상수임
         //readonly: 선언시 값을 할당하지 않아도 가능하며, 생성자에서 한번 더 값 변경 가능 
@@ -236,7 +237,22 @@ namespace ConsoleApplication5.BillingInterface
 
         public int PrintItemList()
         {
-            throw new NotImplementedException();
+            try
+            {
+
+                    Console.WriteLine("===== item 목록이 없습니다 ===== ");
+              
+                    Console.WriteLine("=====item 리스트===== ");
+                    
+                        Console.WriteLine(objItemCollection.ToString());
+           
+            }
+            catch
+            {
+                throw new NotImplementedException();
+            }
+            return 0;
+
         }
 
         public int PrintCashList()
