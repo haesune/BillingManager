@@ -21,13 +21,10 @@ namespace ConsoleApplication5.BillingInterface
         //caseUseDtl 리스트로 선언함
         List<CashUseDtl> cashUseDtlList = new List<CashUseDtl>();
         ItemCollection objItemCollection = new ItemCollection();
-
+     
         //const : 선언시 그 값을 할당해야하며, 한 번 할당된 후 변경 불가능하다 . 즉 변수 정의와 함께 초기화 되어야 하는 상수임
         //readonly: 선언시 값을 할당하지 않아도 가능하며, 생성자에서 한번 더 값 변경 가능 
-        //TO DO :클래스로 빼기
-        public const int itemId = 1000;
-        public const double itemPrice = 1000;
-        public const String itemName = "testItem";
+   
 
         public int GetBalance()
         {
@@ -118,17 +115,19 @@ namespace ConsoleApplication5.BillingInterface
 
             Cash cash = new Cash();
             Purchase purchase = new Purchase(userId);
-
+            Item item = new Item();
             try
             {
+                item = objItemCollection.findByItemID(itemNo);
+
                 //잔액체크
                 GetBalance();
-                if (currBalance < itemPrice) {
+                if (currBalance < item.itemPrice) {
                     //튕겨
                     Console.WriteLine("잔액 부족");
                     return 1;
                 }
-                double remainItemPrice = itemPrice;
+                double remainItemPrice = item.itemPrice;
                 //어떤캐시로 구매할 것인지 확인(구매 가능여부 체크) 
                 for (int i = 0; i < cashList.Count; i++)
                 {
@@ -169,8 +168,8 @@ namespace ConsoleApplication5.BillingInterface
                 }
                 
                 purchase.itemId   = itemNo;
-                purchase.itemName = itemName;
-                purchase.price    = itemPrice;
+                purchase.itemName = "Test";
+                purchase.price    = item.itemPrice;
                 purchase.useState = 1;
                 purchase.regDate  = DateTime.Now;
 
@@ -239,15 +238,13 @@ namespace ConsoleApplication5.BillingInterface
         {
             try
             {
-
-                    Console.WriteLine("===== item 목록이 없습니다 ===== ");
+                
               
                     Console.WriteLine("=====item 리스트===== ");
                     
-                        Console.WriteLine(objItemCollection.ToString());
            
             }
-            catch
+            catch   
             {
                 throw new NotImplementedException();
             }
@@ -257,7 +254,30 @@ namespace ConsoleApplication5.BillingInterface
 
         public int PrintCashList()
         {
-            throw new NotImplementedException();
+            try
+            {
+
+                if (cashList.Count.Equals(0))
+                {
+
+                    Console.WriteLine("===== 나의 캐시 목록이 없습니다 ===== ");
+                }
+                else
+                {
+                    Console.WriteLine("===== 나의 cashList 리스트 ===== ");
+                    for (int i = 0; i < cashList.Count; i++)
+                    {
+                        if (cashList[i].userId.Equals(userId)) {
+                            Console.WriteLine(cashList[i]);
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                throw new NotImplementedException();
+            }
+            return 0;
         }
 
         public int PrintItemPurchaseHistory(List<BillingManager> objList)

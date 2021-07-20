@@ -15,9 +15,8 @@ namespace ConsoleApplication5.BillingInterface
             //java에서는 .equals("admin")으로 해야한다.
 
             //페레 특 : 그냥 equls로 통일하자
-            if (userID.Equals("admin"))
+            if (userID.Equals("admin") || userID.Equals("admin2") || userID.Equals("admin3"))
             {
-                
                 return new AdminManager(userID);
             }
             else if (userID.Equals("user1")|| userID.Equals("user2"))

@@ -13,6 +13,7 @@
             this.itemName = itemName;
             this.itemPrice = itemPrice;
         }
+        public Item() { }
     }
 
 }
